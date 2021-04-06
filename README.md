@@ -1,0 +1,1 @@
+# mog-nextjs-strapi
