@@ -7,6 +7,13 @@
   align-items: center;
 }
 
+.pageheader {
+  width: 100%;
+  border: 1px solid rgb(235, 237, 240);
+  background-color: #000;
+  color: #fff;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;
@@ -18,11 +25,16 @@
 
 .footer {
   width: 100%;
-  height: 100px;
+  height: 200px;
   border-top: 1px solid #eaeaea;
-  display: flex;
+  color: #fff;
+  background-color: #000;
   justify-content: center;
   align-items: center;
+}
+
+.col {
+  padding: 2em;
 }
 
 .footer img {
