@@ -1,64 +1,64 @@
 import Head from "next/head";
 import "antd/dist/antd.css";
 import styles from "../../styles/Home.module.css";
-import { Card, Col, Row } from "antd";
+import { Badge } from "antd";
 
-function CardItem(props) {
-  return (
-    <div>
-      <Col>
-        <Card className={styles.card} title={props.title} bordered={false}>
-          {props.type}
-        </Card>
-      </Col>
-    </div>
-  );
-}
-
-function Home({ topStories }) {
+function storyDisplay({ storyData }) {
   return (
     <div>
       <Head>
-        <title>TOP Stories</title>
+        <title>Top Story - {storyData.title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Row>
-          {topStories.map((story) => {
-            // console.log(story);
-            return (
-              <CardItem
-                key={story.id}
-                title={story.title}
-                type={story.type}
-              ></CardItem>
-            );
-          })}
-        </Row>
+        <div className={styles.title}>
+          <h1>{storyData.title}</h1>
+        </div>
+        <h3>Authored by: {storyData.by}</h3>
+        <Badge
+          count={storyData.score}
+          style={{ backgroundColor: checkBadgeColor(storyData.score) }}
+          className={styles.badge}
+        />
+        <div className={styles.link}>
+          <p>For more information visit: </p>
+          <a href={storyData.url} target="_blank">
+            {storyData.url}
+          </a>
+        </div>
       </main>
     </div>
   );
 }
 
-export async function getServerSideProps() {
-  const api = "https://hacker-news.firebaseio.com/v0";
+function checkBadgeColor(score) {
+  let badgeColor = "";
 
-  const res = await fetch(`${api}/topstories.json?print=pretty`);
-  const data = await res.json();
+  if (score <= 20) {
+    badgeColor = "#ff4d4f";
+  } else if (score > 20 && score <= 70) {
+    badgeColor = "#faad14";
+  } else {
+    badgeColor = "#52c41a";
+  }
 
-  const stories = data.slice(0, 5);
-
-  const topStories = await Promise.all(
-    stories.map(async (story) => {
-      const response = await fetch(`${api}/item/${story}.json?print=pretty`);
-      const data2 = await response.json();
-
-      return data2;
-    })
-  );
-
-  // console.log(topStories);
-  return { props: { topStories } };
+  return badgeColor;
 }
 
-export default Home;
+export async function getServerSideProps(context) {
+  const api = "https://hacker-news.firebaseio.com/v0";
+  const storyId = context.params.slug;
+
+  async function fetchStoryData() {
+    const res = await fetch(`${api}/item/${storyId}.json?print=pretty`);
+    return await res.json();
+  }
+
+  return {
+    props: {
+      storyData: await fetchStoryData(),
+    },
+  };
+}
+
+export default storyDisplay;
