@@ -26,12 +26,11 @@ function CardItem(props) {
 
 function Home({ blogPosts }) {
   const { pathname } = useRouter();
-  console.log(blogPosts)
 
   return (
     <div>
       <Head>
-        <title>TOP Stories</title>
+        <title>Blog Posts</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>

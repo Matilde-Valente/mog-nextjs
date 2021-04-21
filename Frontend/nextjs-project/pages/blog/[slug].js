@@ -9,7 +9,7 @@ function blogPostDisplay({ blogPost }) {
   return (
     <div>
       <Head>
-        <title>Top Story - {blogPost.title}</title>
+        <title>Blog Post - {blogPost.title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
