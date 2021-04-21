@@ -14,3 +14,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.layout {
+  height: 100vh;
+}
+
+.footer {
+  position: "absolute";
+  bottom: 0;
+  width: "100%";
+  background: #001529 !important;
+  color: #fff !important;
+}

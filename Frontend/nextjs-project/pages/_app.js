@@ -9,7 +9,12 @@ function MyApp({ Component, pageProps }) {
     <Layout className="layout">
       <Header>
         <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["0"]}>
+          <Menu.Item key="0">
+            <Link href="/">
+              <a>Home</a>
+            </Link>
+          </Menu.Item>
           <Menu.Item key="1">
             <Link href="/kanye">
               <a>Kanye</a>
@@ -20,12 +25,17 @@ function MyApp({ Component, pageProps }) {
               <a>Top stories</a>
             </Link>
           </Menu.Item>
+          <Menu.Item key="3">
+            <Link href="/blog">
+              <a>Blog</a>
+            </Link>
+          </Menu.Item>
         </Menu>
       </Header>
       <Content>
         <Component {...pageProps} />
       </Content>
-      <Footer style={{ position: "absolute", bottom: 0, width: "100%" }}>
+      <Footer className="footer">
         This is the Footer
       </Footer>
     </Layout>
