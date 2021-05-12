@@ -5,27 +5,11 @@ import styles from "../../styles/Home.module.css";
 import { Card, Col, Row } from "antd";
 import { useRouter } from "next/router";
 
-const { Meta } = Card;
 const api = "http://localhost:1337";
 
-function CardItem(props) {
-  return (
-    <div>
-      <Col>
-        <Card
-          style={{ width: 300 }}
-          cover={<img alt={props.imgAlt} src={props.imgSrc} />}
-          bordered={false}
-        >
-          <Meta title={props.title} description={props.content} />
-        </Card>
-      </Col>
-    </div>
-  );
-}
-
 function Home({ blogPosts }) {
-  const { pathname } = useRouter();
+  const { pathname, locale } = useRouter();
+  console.log(locale)
 
   return (
     <div>
@@ -55,11 +39,9 @@ function Home({ blogPosts }) {
   );
 }
 
-export async function getStaticProps(ctx) {
-  const language = ctx.locale
-
+export async function getStaticProps() {
   async function fetchBlogPosts() {
-    const res = await fetch(`${api}/blog-posts?_locale=${language}`);
+    const res = await fetch(`${api}/blog-posts`);
     return await res.json();
   }
 

@@ -25,15 +25,18 @@ function blogPostDisplay({ blogPost }) {
 
 export async function getServerSideProps(context) {
   const blogPostId = context.params.slug;
+  const language = context.locale
+
+  console.log(language)
 
   async function fetchBlogPostData() {
-    const res = await fetch(`${api}/blog-posts/${blogPostId}`);
+    const res = await fetch(`${api}/blog-posts/${blogPostId}?_locale=${language}`);
     return await res.json();
   }
 
   return {
     props: {
-      blogPost: await fetchBlogPostData(),
+      blogPost: fetchBlogPostData(),
     },
   };
 }

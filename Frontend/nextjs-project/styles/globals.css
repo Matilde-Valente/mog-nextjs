@@ -19,6 +19,16 @@ a {
   height: 100vh;
 }
 
+.ant-layout-header {
+  background: #fff !important;
+}
+
+.ant-menu-vertical {
+  width: 100vw;
+  height: auto;
+  display: flex;
+}
+
 .footer {
   position: "absolute";
   bottom: 0;

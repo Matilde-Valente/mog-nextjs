@@ -1,0 +1,17 @@
+.product .title {
+  line-height: 1em;
+}
+
+.product .title h4{
+  font-weight: bold;
+}
+
+.product .links {
+  display: flex;
+  flex-direction: column;
+  line-height: 2em;
+}
+
+.product .icon{
+  font-size: 20px;
+}
